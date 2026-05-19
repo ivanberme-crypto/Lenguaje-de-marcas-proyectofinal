@@ -305,7 +305,7 @@ document.getElementById("btn-nuevo-detalle").onclick = () => {
   `, () => {
     if(!db.detalles) db.detalles = [];
     db.detalles.push(new DetalleVenta(db.nextId.detalles++, d_vnt.value, d_prd.value, d_can.value, d_pre.value));
-    save(); renderDetalles(); closeModal(); toast("Detalle añadido");
+    save(); renderDetalles(); closeModal(); toast("Detail añadido");
   });
 };
 
@@ -375,6 +375,14 @@ window.deleteUsuario = id => {
     save(); renderUsuarios();
 };
 
+function mostrarFechaActual() {
+  const fechaEl = document.getElementById("fecha-actual");
+  if (fechaEl) {
+    const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    fechaEl.textContent = new Date().toLocaleDateString("es-ES", opciones);
+  }
+}
+
 renderClientes();
 renderProductos();
 renderVentas();
@@ -382,3 +390,4 @@ renderDetalles();
 renderUsuarios();
 updateCounts();
 actualizarAnchoVentana();
+mostrarFechaActual();

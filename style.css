@@ -42,11 +42,22 @@ body {
 
 .header__top {
   margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .header__logo-img {
   width: 180px;
   display: block;
+}
+
+.header__fecha {
+  color: var(--texto);
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .header__nav {
