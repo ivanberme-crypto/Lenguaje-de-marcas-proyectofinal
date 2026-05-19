@@ -1,64 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRM TiendaZapas</title>
+  <title>Zapnn</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <header class="header">
-
     <div class="header__top"> 
       <img src="img/imgzapnn.png" alt="Logo" class="header__logo-img">
     </div>
-
     <nav class="header__nav">
-      <button class="header__btn header__btn--activo" data-seccion="clientes">Clientes</button>
+      <button class="header__btn header__btn--activo" data-seccion="inicio">Inicio</button>
+      <button class="header__btn" data-seccion="clientes">Clientes</button>
       <button class="header__btn" data-seccion="productos">Productos</button>
       <button class="header__btn" data-seccion="ventas">Ventas</button>
+      <button class="header__btn" data-seccion="detalles">Detalle Ventas</button>
       <button class="header__btn" data-seccion="usuarios">Usuarios</button>
     </nav>
-
   </header>
 
   <main class="main">
-
     <div class="toast" id="toast"></div>
 
     <div class="modal" id="modal">
       <div class="modal__contenido">
-
         <div class="modal__header">
           <h2 id="modal-title"></h2>
           <button id="modal-close" class="modal__cerrar">✕</button>
         </div>
-
         <div class="modal__body" id="modal-body"></div>
-
         <div class="modal__footer">
           <button id="modal-cancel" class="btn btn--secundario">Cancelar</button>
           <button id="modal-save" class="btn btn--principal">Guardar</button>
         </div>
-
       </div>
     </div>
 
-    <section class="seccion" id="seccion-clientes">
+    <section class="seccion seccion--inicio" id="seccion-inicio">
+      <div class="seccion__top">
+        <div>
+          <h2 class="seccion__titulo">Dashboard</h2>
+          <p class="seccion__texto">Resumen Zapnn</p>
+        </div>
+      </div>
 
+      <div class="dashboard-grid">
+        <div class="stats-card stats-card--verde">
+          <h3 class="stats-card__titulo">Ventas Completadas</h3>
+          <p class="stats-card__numero" id="dash-ventas">0</p>
+          <span class="stats-card__subtexto">Pedidos procesados</span>
+        </div>
+        <div class="stats-card stats-card--amarillo">
+          <h3 class="stats-card__titulo">Stock Total</h3>
+          <p class="stats-card__numero" id="dash-stock">0</p>
+          <span class="stats-card__subtexto">Zapatillas en almacén</span>
+        </div>
+        <div class="stats-card stats-card--rojo">
+          <h3 class="stats-card__titulo">Total Clientes</h3>
+          <p class="stats-card__numero" id="dash-clientes">0</p>
+          <span class="stats-card__subtexto">Clientes registrados</span>
+        </div>
+        <div class="stats-card stats-card--azul stats-card--wide">
+          <h3 class="stats-card__titulo">Facturación Total</h3>
+          <p class="stats-card__numero" id="dash-facturacion">0.00€</p>
+          <span class="stats-card__subtexto">Ingresos acumulados</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion seccion--clientes seccion--oculta" id="seccion-clientes">
       <div class="seccion__top">
         <div>
           <h2 class="seccion__titulo">Clientes</h2>
           <p class="seccion__texto" id="clientes-count">0 clientes</p>
         </div>
-
         <button class="btn btn--principal" id="btn-nuevo-cliente">+ Nuevo cliente</button>
       </div>
-
       <div class="buscador">
-        <input type="text" id="buscar-cliente" class="buscador__input" placeholder="Buscar...">
+        <input type="text" id="buscar-cliente" class="buscador__input" placeholder="Buscar">
       </div>
-
       <div class="tabla-box">
         <table class="tabla">
           <thead>
@@ -74,30 +98,26 @@
           <tbody id="tabla-clientes"></tbody>
         </table>
       </div>
-
     </section>
 
-    <section class="seccion seccion--oculta" id="seccion-productos">
-
+    <section class="seccion seccion--productos seccion--oculta" id="seccion-productos">
       <div class="seccion__top">
         <div>
           <h2 class="seccion__titulo">Productos</h2>
           <p class="seccion__texto" id="productos-count">0 productos</p>
         </div>
-
         <button class="btn btn--principal" id="btn-nuevo-producto">+ Nuevo producto</button>
       </div>
-
       <div class="buscador">
         <input type="text" id="buscar-producto" class="buscador__input" placeholder="Buscar...">
       </div>
-
       <div class="tabla-box">
         <table class="tabla">
           <thead>
             <tr>
               <th>ID</th>
               <th>Nombre</th>
+              <th>Descripción</th>
               <th>Marca</th>
               <th>Talla</th>
               <th>Color</th>
@@ -110,29 +130,22 @@
           <tbody id="tabla-productos"></tbody>
         </table>
       </div>
-
     </section>
 
-    <!-- VENTAS -->
-    <section class="seccion seccion--oculta" id="seccion-ventas">
-
+    <section class="seccion seccion--ventas seccion--oculta" id="seccion-ventas">
       <div class="seccion__top">
         <div>
           <h2 class="seccion__titulo">Ventas</h2>
           <p class="seccion__texto" id="ventas-count">0 ventas</p>
         </div>
-
         <button class="btn btn--principal" id="btn-nueva-venta">+ Nueva venta</button>
       </div>
-
-      <div class="stats" id="stats-ventas"></div>
-
       <div class="tabla-box">
         <table class="tabla">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Cliente</th>
+              <th>ID Cliente</th>
               <th>Vendedor</th>
               <th>Estado</th>
               <th>Total</th>
@@ -143,21 +156,41 @@
           <tbody id="tabla-ventas"></tbody>
         </table>
       </div>
-
     </section>
 
+    <section class="seccion seccion--detalles seccion--oculta" id="seccion-detalles">
+      <div class="seccion__top">
+        <div>
+          <h2 class="seccion__titulo">Detalle Ventas</h2>
+          <p class="seccion__texto" id="detalles-count">0 detalles</p>
+        </div>
+        <button class="btn btn--principal" id="btn-nuevo-detalle">+ Nuevo detalle</button>
+      </div>
+      <div class="tabla-box">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>ID Venta</th>
+              <th>ID Producto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-detalles"></tbody>
+        </table>
+      </div>
+    </section>
 
-    <section class="seccion seccion--oculta" id="seccion-usuarios">
-
+    <section class="seccion seccion--usuarios seccion--oculta" id="seccion-usuarios">
       <div class="seccion__top">
         <div>
           <h2 class="seccion__titulo">Usuarios</h2>
           <p class="seccion__texto" id="usuarios-count">0 usuarios</p>
         </div>
-
         <button class="btn btn--principal" id="btn-nuevo-usuario">+ Nuevo usuario</button>
       </div>
-
       <div class="tabla-box">
         <table class="tabla">
           <thead>
@@ -166,23 +199,20 @@
               <th>Nombre</th>
               <th>Email</th>
               <th>Rol</th>
+              <th>Password Hash</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody id="tabla-usuarios"></tbody>
         </table>
       </div>
-
     </section>
-
   </main>
 
   <footer class="footer">
     <p class="footer__texto">Zapnn (Marca registrada)</p>
-  </footer>
+  </footer >
 
   <script src="app.js"></script>
-
 </body>
-
 </html>
